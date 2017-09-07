@@ -2,10 +2,10 @@ package pages;
 
 import enums.Url;
 import org.openqa.selenium.By;
-import utils.CommonUtils;
+import utils.CommonFunctions;
 
 
-public class HomePage extends CommonUtils {
+public class HomePage extends CommonFunctions {
 
   private final By YOUR_ACCOUNT = By.id("nav-link-accountList");
   private final By SHOPPING_CART_ICON = By.cssSelector("#nav-cart > span.nav-line-2");

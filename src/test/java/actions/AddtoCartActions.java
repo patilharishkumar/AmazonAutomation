@@ -15,6 +15,7 @@ public class AddtoCartActions {
         signOut();
     }
 
+
     public void signOut() {
         HomePage homePage = new HomePage();
         homePage.signOutWithSignOutLink();
@@ -41,13 +42,13 @@ public class AddtoCartActions {
 
     public void deleteAllItemsIfAnyFromCart() {
         HomePage homePage = new HomePage();
-        ShoppingCartPage shoppingCartPage = new ShoppingCartPage();
+        MyCartPage myCartPage = new MyCartPage();
         String itemsInCart = homePage.getNumberOfItemsListedInShoppingCartIcon();
         if (!itemsInCart.equals("0")) {
             homePage.selectShoppingCartIcon();
-            shoppingCartPage.verifyOnShoppingCartPage();
+            myCartPage.verifyOnMyCartPage();
             System.out.println("*** Deleting the found item(s) out from the shopping cart. ***\n");
-            shoppingCartPage.deleteAllItemsInCart();
+            myCartPage.deleteAllItemsInCart();
         } else {
             System.out.println("*** Nothing to delete - the shopping cart appears to be empty. ***\n");
         }

@@ -3,10 +3,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.testng.TestException;
-import utils.CommonUtils;
+import utils.CommonFunctions;
 
 
-public class ShoppingCartReviewPage extends CommonUtils {
+public class ShoppingCartReviewPage extends CommonFunctions {
 
   private final By PRICE = By.cssSelector("[class='a-size-medium a-color-price sc-price sc-white-space-nowrap sc-price-sign']");
 

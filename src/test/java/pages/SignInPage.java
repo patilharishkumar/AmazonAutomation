@@ -1,10 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
-import utils.CommonUtils;
+import utils.CommonFunctions;
 
 
-public class SignInPage extends CommonUtils {
+public class SignInPage extends CommonFunctions {
 
   private final By USERNAME = By.cssSelector("#ap_email");
   private final By PASSWORD = By.cssSelector("#ap_password");

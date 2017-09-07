@@ -9,7 +9,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.ShoppingCartReviewPage;
 import pojo.Device;
-import utils.DriverUtils;
+import utils.DriverSetup;
 
 import static org.testng.Assert.assertEquals;
 
@@ -26,52 +26,53 @@ public class AddtoCartTest {
 
   @BeforeClass
   public void setUp() {
-    driver = DriverUtils.getDriver();
+    driver = DriverSetup.getDriver();
   }
 
   @Test(description="Launches the  Amazon site", priority = 1)
-  public void testLaunchSite() {
-    shoppingActions.initializeLogin();
+  public void launchSite() {
+   // shoppingActions.initializeLogin();
     shoppingActions.navigateToHomePage();
   }
 
   @Test(description="Logs in", priority = 2)
-  public void testLogIn() {
+  public void logIn() {
     shoppingActions.logInAs(username, password);
   }
 
   @Test(description = "Navigates to the shopping cart and makes sure it is empty", priority = 3)
-  public void testInitializeShoppingCart() {
+  public void initializeShoppingCart() {
     shoppingActions.prepareCart();
   }
 
-  @Test(description = "Adds one item to the shopping cart", priority = 4)
-  public void testAddProductToShoppingCart() {
+  @Test(description = "Adds device items to the shopping cart", priority = 4)
+  public void addProductToShoppingCart() {
     shoppingActions.addProductToShoppingCartReview(testDevice);
     shoppingActions.addProductToShoppingCartReview(testDevice2);
   }
 
-  @Test(description = "Compares the cart subtotal versus the item price", priority = 5)
-  public void testVerifyPrices() {
+  @Test(description = "Compares the cart subtotal with the items price", priority = 5)
+  public void verifyPrices() {
     String actualCartSubtotalPrice = shoppingCartReviewPage.getCartSubtotal();
-    System.out.println(actualCartSubtotalPrice);
+    actualCartSubtotalPrice = actualCartSubtotalPrice.replaceAll("[^\\d.]","");
+  //  System.out.println(actualCartSubtotalPrice);
     Device deviceProductPage = shoppingActions.loadProductPageDataIntoProductObject(testDevice);
     Device deviceProductPage2 = shoppingActions.loadProductPageDataIntoProductObject(testDevice2);
     String expectedDevicePrice = deviceProductPage.getOfferPrice();
     expectedDevicePrice = expectedDevicePrice.replaceAll("[^\\d.]","");
     String expectedDevicePrice2 = deviceProductPage2.getOfferPrice();
        expectedDevicePrice2 = expectedDevicePrice2.replaceAll("[^\\d.]","");
-     System.out.println(expectedDevicePrice);
-    System.out.println(expectedDevicePrice2);
-      Long val=Long.parseLong(expectedDevicePrice.trim());
-      System.out.println(val);
-      Long val2= Long.parseLong(expectedDevicePrice2.trim());
-      System.out.println(val2);
-         Long finalExpectedDevicePrice=val+val2;
+    // System.out.println(expectedDevicePrice);
+    // System.out.println(expectedDevicePrice2);
+      Float val=Float.parseFloat(expectedDevicePrice.trim());
+    //  System.out.println(val);
+      Float val2= Float.parseFloat(expectedDevicePrice2.trim());
+     // System.out.println(val2);
+         Float finalExpectedDevicePrice=val+val2;
          System.out.println(finalExpectedDevicePrice);
 
    // Integer finalExpectedDevicePrice=Integer.parseInt(expectedDevicePrice)+Integer.parseInt(expectedDevicePrice);
-     String totalExpectedPrice=Long.toString(finalExpectedDevicePrice);
+     String totalExpectedPrice=Float.toString(finalExpectedDevicePrice);
     shoppingActions.checkMatchingValues("*** Verifying the actual price listed for the device: ***",
             actualCartSubtotalPrice, totalExpectedPrice);
     assertEquals(actualCartSubtotalPrice, totalExpectedPrice,

@@ -5,10 +5,10 @@ import enums.Products;
 import enums.Url;
 import org.openqa.selenium.By;
 import org.testng.TestException;
-import utils.CommonUtils;
+import utils.CommonFunctions;
 
 
-public class ProductPage extends CommonUtils {
+public class ProductPage extends CommonFunctions {
 
   private final By PRODUCT_TITLE = By.cssSelector("#productTitle");
   private final By PRODUCT_PRICE = By.cssSelector(".a-span12.a-color-secondary.a-size-base .a-text-strike");
@@ -35,10 +35,13 @@ public class ProductPage extends CommonUtils {
   public void clickAddToCart() {
     System.out.println("PRODUCT_PAGE: Clicking on [ADD_TO_CART] button.\n");
     click(ADD_TO_CART);
-    click(CLOSE_POPUP);
-//    driver.switchTo().alert().dismiss();
-    //IAlert simpleAlert = driver.SwitchTo().Alert();
-    //simpleAlert.Dismiss();
+   // if(driver.findElements(By.id("siNoCoverage-announce")).size()!=0){
+      click(CLOSE_POPUP);
+  //  }
+
+      //click(CLOSE_POPUP);
+
+
   }
 
   public String getProductTitle() {
